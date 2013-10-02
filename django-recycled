@@ -6,7 +6,7 @@
 # Usage:
 # mkdir test-dir
 # cd test-dir
-# bash -c "$(curl -fsSL https://raw.github.com/vinodpandey/scripts/master/django-recycled)" --django=1.5.0
+# bash -c "$(curl -fsSL https://raw.github.com/vinodpandey/scripts/master/django-recycled)" -s --django=1.5.0
 # cd project
 # python manage.py syncdb
 # 
