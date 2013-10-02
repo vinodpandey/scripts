@@ -1,12 +1,12 @@
-#!/usr/bin/env bash
-shopt -s extglob
+#!/bin/bash
+
 # Quick and dirty django setup for testing
 #
 # This script installs django and configures it with sqlite
 # Usage:
 # mkdir test-dir
 # cd test-dir
-# \curl https://raw.github.com/vinodpandey/scripts/master/django-recycled | bash --django=1.5.0
+# bash -c "$(curl -fsSL https://raw.github.com/vinodpandey/scripts/master/django-recycled)" --django=1.5.0
 # cd project
 # python manage.py syncdb
 # 
