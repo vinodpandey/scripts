@@ -1,0 +1,105 @@
+#!/usr/bin/env bash
+
+# Quick and dirty django setup for testing
+#
+# This script installs django and configures it with sqlite
+# Usage:
+# mkdir test-dir
+# cd test-dir
+# \curl https://raw.github.com/vinodpandey/script/master/django-recycled | bash --django==1.5.0
+# cd project
+# python manage.py syncdb
+# 
+# Firefox plugin for sqlite
+# https://addons.mozilla.org/en-US/firefox/addon/sqlite-manager/
+
+
+######################
+# Required functions
+######################
+usage()
+{
+  printf "%b" "
+Usage
+  django-recycled --django=1.5.0
+
+Dependency
+  Requires virtualenv-2.7
+
+"
+}
+
+log()  { printf "%b\n" "$*"; }
+
+fail() { log "\nERROR: $*\n" ; exit 1 ; }
+
+install_django()
+{
+	echo "Installing Django $*" 
+    pip install Django==$*
+
+    echo "Creating Django Project"
+    django-admin.py startproject project
+
+    if [[ $* == 1.5* ]]; then
+    	echo "Updated database settings in settings.py"
+      sed -i".bak" -e "s/django.db.backends./django.db.backends.sqlite3/g" project/project/settings.py
+      sed -i".bak" -e "s/'NAME': ''/'NAME': 'database.sqlite'/g" project/project/settings.py
+      rm -rf project/project/settings.py.bak
+	  fi
+}
+
+######################
+
+
+if [[ "x$(virtualenv-2.7 --version)" = "x" ]]
+then
+    fail "Could not find 'virtualenv-2.7' command, make sure it's available first before continuing installation."
+fi
+
+
+echo "Creating virtual environment"
+
+virtualenv-2.7 --no-site-packages .
+source bin/activate
+
+# Parse CLI arguments.
+if (($# < 1))
+then
+	log "\nERROR: \nNo argument found!!"
+	usage
+	exit 1
+fi
+
+while (( $# > 0 ))
+do
+  token="$1"
+  shift
+  case "$token" in
+
+    --django=*)
+      version="${token#--django=}" 
+      if [[ $version == "" ]]
+      then
+         fail "--django must be followed by a version"
+      else
+         install_django "$version" 
+      fi   
+      ;;
+
+    help|usage)
+      usage
+      exit 0
+      ;;  
+    
+    *)
+      usage
+      exit 1
+      ;;
+
+  esac
+done
+
+
+echo "Done"
+deactivate
