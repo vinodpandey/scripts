@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+shopt -s extglob
 # Quick and dirty django setup for testing
 #
 # This script installs django and configures it with sqlite
