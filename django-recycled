@@ -12,7 +12,9 @@
 # 
 # Firefox plugin for sqlite
 # https://addons.mozilla.org/en-US/firefox/addon/sqlite-manager/
-
+#
+# Portion of the code used from 
+# https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer
 
 ######################
 # Required functions
