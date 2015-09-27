@@ -1,6 +1,6 @@
 #!/bin/bash
 # >> If using vagrant, for python installation, place this script in ~/ instead of /vagrant <<
-# wget --no-check-certificate -O virtualenv-python2.7.3.sh https://raw.github.com/vinodpandey/scripts/master/virtualenv-pip-python2.7.3.sh
+# wget --no-check-certificate -O virtualenv-pip-python2.7.3.sh https://raw.github.com/vinodpandey/scripts/master/virtualenv-pip-python2.7.3.sh
 # chmod +x virtualenv-python2.7.3.sh
 # ./virtualenv-pip-python2.7.3.sh
 # # creating virtual environment
