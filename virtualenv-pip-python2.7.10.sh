@@ -59,6 +59,7 @@ fi
 # check if virtualenv is present, otherwise install it
 if [[ $(virtualenv-2.7 --version) != 1.9.1* ]]; then
     sudo pip2.7 install virtualenv==1.9.1
+    sudo ln -sfn /usr/local/bin/virtualenv-2.7 /usr/bin/virtualenv-2.7
 else
     echo "virtualenv-2.7 v1.9.1 present"
 fi
