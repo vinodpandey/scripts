@@ -1,8 +1,8 @@
 #!/bin/bash
 # >> If using vagrant, for python installation, place this script in ~/ instead of /vagrant <<
-# cd /usr/local/src
-# sudo wget --no-check-certificate -O virtualenv-pip-python2.7.12.sh https://raw.github.com/vinodpandey/scripts/master/virtualenv-pip-python2.7.12.sh
-# sudo chmod +x virtualenv-pip-python2.7.12.sh
+# cd ~
+# wget --no-check-certificate -O virtualenv-pip-python2.7.12.sh https://raw.github.com/vinodpandey/scripts/master/virtualenv-pip-python2.7.12.sh
+# chmod +x virtualenv-pip-python2.7.12.sh
 # ./virtualenv-pip-python2.7.12.sh
 # # creating virtual environment
 # virtualenv-2.7 --no-site-packages .
@@ -16,17 +16,17 @@
 if [[ $(python2.7 -c 'import sys; print(".".join(map(str, sys.version_info[:3])))') != 2.7.* ]]; then
     echo "Installing Python 2.7.12"
     sudo yum -y install sqlite-devel zlib zlib-devel gcc httpd-devel bzip2-devel openssl openssl-devel
-    sudo mkdir -p temp
+    mkdir -p temp
     cd temp
-    sudo wget http://www.python.org/ftp/python/2.7.12/Python-2.7.12.tgz
-    sudo tar zxvf Python-2.7.12.tgz
+    wget http://www.python.org/ftp/python/2.7.12/Python-2.7.12.tgz
+    tar zxvf Python-2.7.12.tgz
     cd Python-2.7.12
-    sudo ./configure --prefix=/usr/local --with-threads --enable-shared --with-zlib=/usr/include
-    sudo make
+    ./configure --prefix=/usr/local --with-threads --enable-shared --with-zlib=/usr/include
+    make
     sudo make altinstall
     cd ..
     cd ..
-    sudo rm -rf temp
+    rm -rf temp
     sudo echo "/usr/local/lib" > python2.7.conf
     sudo mv python2.7.conf /etc/ld.so.conf.d/python2.7.conf
     sudo /sbin/ldconfig
@@ -38,8 +38,8 @@ fi
 # check pip, if not present, install it
 if [[ $(pip2.7 --version) != pip* ]]; then
     echo "Installing pip" 
-    sudo wget -O get-pip.py https://bootstrap.pypa.io/get-pip.py
-    sudo chmod +x get-pip.py
+    wget -O get-pip.py https://bootstrap.pypa.io/get-pip.py
+    chmod +x get-pip.py
     sudo python2.7 get-pip.py 
     sudo rm -f get-pip.py 
     sudo ln -sfn /usr/local/bin/pip2.7 /usr/bin/pip2.7
