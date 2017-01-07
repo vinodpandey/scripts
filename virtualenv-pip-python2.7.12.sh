@@ -10,7 +10,7 @@
 # source bin/activate
 # # deactivating virtualenv
 # deactivate
-#!/bin/bash
+
 die () {
 	echo "ERROR: $1. Aborting!"
 	exit 1
