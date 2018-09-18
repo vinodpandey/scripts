@@ -30,25 +30,25 @@ verify_root() {
 }
 
 check_python_version() {
-    if [[ $(python3.6 -c 'import sys; print(".".join(map(str, sys.version_info[:3])))') == 3.6.* ]]; then
-    	SYS_VERSION=$(python3.6 -c 'import sys; print(".".join(map(str, sys.version_info[:3])))')
+    if [[ $(/usr/local/bin/python3.6 -c 'import sys; print(".".join(map(str, sys.version_info[:3])))') == 3.6.* ]]; then
+    	SYS_VERSION=$(/usr/local/bin/python3.6 -c 'import sys; print(".".join(map(str, sys.version_info[:3])))')
     	echo Python $SYS_VERSION already installed
     	exit 1
-	fi
+    fi
 }
 
 install_system_packages() {
-	yum -y install gcc openssl-devel bzip2-devel
+    yum -y install gcc openssl-devel bzip2-devel
 }
 
 extract_python_source() {
-	wget "$URL" -O "$TARBALL"
-	tar -C "$DIR" -xvf "$TARBALL"
+    wget "$URL" -O "$TARBALL"
+    tar -C "$DIR" -xvf "$TARBALL"
 }
  
 install_python() {
-	cd Python-${VERSION}
-	./configure --enable-optimizations
+    cd Python-${VERSION}
+    ./configure --enable-optimizations
     make altinstall
 }
 
